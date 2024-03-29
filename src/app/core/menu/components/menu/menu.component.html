@@ -1,0 +1,95 @@
+<div class="p-8 rounded-md">
+  <div class="space-x-8">
+    <h2 class="text-gray-600 font-semibold">Liste des Menus</h2>
+  </div>
+  <div id="search-bar" class="flex justify-between items-center" style="margin-top: 2rem;">
+    <div>
+    </div>
+      <div class="lg:ml-40 ml-10">
+        <div class="mt-5 sm:mt-8 sm:flex sm:justify-center gap-4">
+          <app-button (click)="openModalFunc()"></app-button>
+        </div>
+      </div>
+  </div>
+  <!-- <app-table [data]="ListeUserAffichage" (actionEffectuee)="traiterAction($event)" [titre]="titreTable" [isEdit]="isEditable" [isDelete]="isDeleted" ></app-table> -->
+  <div class="container_listPlats">
+    <div class="card relative p-6" *ngFor="let menu of allMenus">
+      <div class="actions absolute top-0 right-0 flex gap-2">
+          <button (click)="deleteMenu(menu.id)" class="text-red-600 text-[1.5rem] cursor-pointer py-2">
+            <i class="ri-delete-bin-fill"></i>
+          </button>
+          <button (click)=" remplirForm(menu.id)" class="text-yellow-500 text-[1.5rem] cursor-pointer py-2">
+            <i class="ri-edit-box-fill"></i>
+          </button>
+      </div>
+      <div class="header">
+                  <span class="title">{{menu.nom}}</span>
+                  <span class="price">{{menu.date}}</span>
+                </div>
+                <ul class="lists">
+                  <li class="list" *ngFor="let plat of menu.plats">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>{{plat.nom}}</span>
+                  </li>
+                </ul>
+                <div class="action">
+                  <button type="button" class="action">Reprogrammer</button>
+                </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container_form" [ngClass]="{show: openModalAdd}">
+        <div class="my-6">
+            <div class="relative grid sm:grid-cols-2 items-center gap-16 p-8 mx-auto max-w-4xl bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md text-[#333] font-[sans-serif]">
+              <div class="close absolute top-6 right-1 text-[3rem] text-red-600 cursor-pointer" (click)="openModalFunc()">
+                <i class="ri-close-circle-fill"></i>
+              </div>
+                <div>
+                    <h1 class="text-center text-[1.5rem] text-black font-bold">Programmer un menu</h1>
+                    <img src="../../../../../assets/Black and Yellow Playful Restaurant Food Chef Logo.png" alt="">
+                </div>
+
+                <form action="" class="ml-auo space-y-4" [formGroup]="AjouterMenu">
+                  <mat-form-field color="accent" class="w-full">
+                    <mat-label>nom du menu</mat-label>
+                    <input matInput placeholder="Ex . Korité" formControlName="nom">
+                  </mat-form-field>
+
+                  <mat-form-field color="accent" class="w-full">
+                    <mat-label>Choisir une date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="date">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field color="accent" class="w-full">
+                    <mat-label>Selectionne les plats</mat-label>
+                    <mat-select multiple panelClass="example-panel-red" [(value)]="selected" formArrayName="plats">
+                        <mat-option *ngFor="let plat of ListPlats" value="{{plat.id}}">{{plat.nom}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <!-- <mat-form-field color="accent" class="w-full">
+                    <mat-label>Select an option</mat-label>
+                    <mat-select multiple [(value)]="selected" formArrayName="plats">
+                      <mat-option>None</mat-option>
+                      <mat-option value="option1">Option 1</mat-option>
+                      <mat-option value="option2">Option 2</mat-option>
+                      <mat-option value="option3">Option 3</mat-option>
+                    </mat-select>
+                  </mat-form-field> -->
+                    <button *ngIf="!isEdit" type='button' (click)="ajouterMenu()"
+                        class="text-white bg-[#D91849] hover:bg-blue-600 font-semibold rounded-md text-sm px-4 py-2.5 w-full">Programmer</button>
+                        <button *ngIf="isEdit" (click)="updateMenu()" type='button'
+                        class="text-white bg-[#D91849] hover:bg-blue-600 font-semibold rounded-md text-sm px-4 py-2.5 w-full">Modifier</button>
+                </form>
+            </div>
+        </div>
+</div>
+
+
+<app-loader *ngIf="actifLoader"></app-loader>

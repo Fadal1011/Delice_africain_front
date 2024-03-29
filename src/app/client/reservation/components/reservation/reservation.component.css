@@ -1,0 +1,21 @@
+.part1
+{
+  width: 100%;
+  min-height: 60vh;
+  background:linear-gradient(rgba(0, 0, 0, 0.567),rgba(0, 0, 0, 0.536)), url(../../../../../assets/reserved-table-restaurant.jpg);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--orange);
+}
+
+.part1 h1
+{
+  font-size: 7rem;
+
+}
+
+
+
+

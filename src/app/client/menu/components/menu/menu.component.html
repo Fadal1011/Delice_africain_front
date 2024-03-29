@@ -1,0 +1,36 @@
+<div class="part1">
+  <h1>Menu</h1>
+</div>
+
+<div class="part2">
+  <h1 class="text-center">Notre Menu</h1>
+  <div class="w-full max-w-2xl mx-auto">
+    <div class="flex flex-auto justify-evenly border rounded-md w-full">
+
+        <button class="border-none px-2 py-1 rounded-md w-full" *ngFor="let type of listAllTypes" [ngClass]="{'bg-[#D91849]':type.nom=== TypeActive}">
+            <div class="cursor-pointer" for="searchMCQs" (click)="filterPlatsByType(type.nom)">{{type.nom}}</div>
+        </button>
+
+    </div>
+</div>
+      <div class="listPlat grid-container">
+        <div class="card" *ngFor="let plat of listPlats">
+          <div class="card__image">
+            <img src="{{plat.image}}" alt="">
+          </div>
+          <div class="card__content">
+            <span class="title">{{plat.nom}}</span>
+            <div class="prix">
+             {{plat.prix}} fcfa
+            </div>
+            <p>{{plat.description}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="aucuneProduit flex justify-center" *ngIf="listPlats.length === 0">
+        <img src="../../../../../assets/restaurant-74.svg" alt="">
+      </div>
+      <div class="buttonReservation w-full flex justify-center mt-9">
+          <button class="button">Reservation</button>
+      </div>
+</div>

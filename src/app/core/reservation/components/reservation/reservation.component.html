@@ -1,0 +1,210 @@
+<div class="p-8 rounded-md mt-10">
+<div class="container mx-auto p-6 font-mono">
+    <div class="w-full flex flex-wrap gap-2 justify-between">
+      <div class="flex items-center gap-2">
+        <button (click)="getStatus('')" [ngClass]="{'active': statusActif==''}"
+          class=" actifStatus cursor-pointer relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#D91849] hover:text-[#60A5FA] h-9 rounded-md px-3"
+        >
+          Tout
+        </button>
+        <button (click)="getStatus('en_attente')" [ngClass]="{'active': statusActif=='en_attente'}"
+          class="actifStatus cursor-pointer relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#D91849] hover:text-[#60A5FA] h-9 rounded-md px-3"
+        >
+          En attente
+        </button>
+        <button (click)="getStatus('acceptee')" [ngClass]="{'active': statusActif=='acceptee'}"
+          class="actifStatus cursor-pointer relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#D91849] hover:text-[#FACC14] h-9 rounded-md px-3"
+        >
+          Accepté
+        </button>
+        <button (click)="getStatus('refusee')" [ngClass]="{'active': statusActif=='refusee'}"
+          class="actifStatus cursor-pointer relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#D91849] hover:text-[#FB923C] h-9 rounded-md px-3"
+        >
+          Refusé
+        </button>
+      </div>
+      <form class="form">
+        <label for="search">
+            <input class="input" type="text" required="" placeholder="Search twitter" id="search">
+            <div class="fancy-bg"></div>
+            <div class="search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" class="r-14j79pv r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-4wgw6l r-f727ji r-bnwqim r-1plcrui r-lrvibr">
+                    <g>
+                        <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                    </g>
+                </svg>
+            </div>
+            <button class="close-btn" type="reset">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </label>
+    </form>
+    </div>
+  <div class="w-full mb-8 rounded-lg mt-3 min-h-[30rem] overflow-auto">
+    <div class="w-full overflow-x-auto shadow-lg">
+      <table class="w-full">
+        <thead>
+          <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+            <th class="px-4 py-3">Information du client</th>
+            <th class="px-4 py-3">nombre de personne</th>
+            <th class="px-4 py-3">Status</th>
+            <th class="px-4 py-3">Date de reservation</th>
+            <th class="px-4 py-3">Action</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white">
+          <tr class="text-gray-700" *ngFor="let reservation of listReservations">
+            <td class="px-4 py-3 border">
+              <div class="flex items-center text-sm">
+                <div>
+                  <p class="font-semibold text-black">{{reservation.nom}}</p>
+                  <p class="text-xs text-gray-600">{{reservation.email}}</p>
+                  <p class="text-xs text-gray-600">{{reservation.numero_telephone}}</p>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-ms font-semibold border">{{reservation.nombre_personnes}}</td>
+            <td class="px-4 py-3 text-xs border">
+              <span class="px-2 py-1 font-semibold leading-tight text-black rounded-sm" [ngClass]="{
+                'bg-yellow-500': reservation.statut === 'en_attente',
+                'bg-red-500': reservation.statut === 'refusee',
+                'bg-green-500': reservation.statut === 'acceptee'
+              }">{{reservation.statut}} </span>
+            </td>
+            <td class="px-4 py-3 text-sm border">{{reservation.date_reservation}}</td>
+            <td class="px-4 py-3 text-sm border">
+              <div class="flex items-center justify-center h-full">
+                <!-- <button
+                  class="text-white bg-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                  type="button"
+                >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M4 8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8ZM7 5V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V5H22V7H2V5H7ZM9 4V5H15V4H9ZM9 12V18H11V12H9ZM13 12V18H15V12H13Z"></path></svg>
+                </button> -->
+                <button (click)="openModalFunc(reservation.id)"
+                  class="text-white bg-yellow-600 via-yellow-500 to-yellow-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:focus:ring-yellow-800 shadow-lg shadow-yellow-400/50 dark:shadow-lg dark:shadow-yellow-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                  type="button"
+                >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M1.18164 12C2.12215 6.87976 6.60812 3 12.0003 3C17.3924 3 21.8784 6.87976 22.8189 12C21.8784 17.1202 17.3924 21 12.0003 21C6.60812 21 2.12215 17.1202 1.18164 12ZM12.0003 17C14.7617 17 17.0003 14.7614 17.0003 12C17.0003 9.23858 14.7617 7 12.0003 7C9.23884 7 7.00026 9.23858 7.00026 12C7.00026 14.7614 9.23884 17 12.0003 17ZM12.0003 15C10.3434 15 9.00026 13.6569 9.00026 12C9.00026 10.3431 10.3434 9 12.0003 9C13.6571 9 15.0003 10.3431 15.0003 12C15.0003 13.6569 13.6571 15 12.0003 15Z"></path></svg>
+                </button>
+              </div>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+     <div class="pagination" style="display: flex; justify-content: flex-end;">
+        <app-pagination [links]="links" (page)="otherPage($event)" class="shadow-xl"></app-pagination>
+     </div>
+</div>
+</div>
+
+
+
+
+<div class="container_show" *ngIf="ShowREservation" [ngClass]="{show: openModalShow}">
+  <div class="bg-white max-w-2xl shadow overflow-hidden sm:rounded-lg relative">
+    <button (click)="openModalFunc()" type="button" class="text-white absolute right-0 bg-red-500 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="product-modal">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+   </button>
+    <div class="px-4 py-5 sm:px-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Detail du reservation
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+          Détails et informations sur la reservation.
+        </p>
+    </div>
+    <div class="border-t border-gray-200">
+        <dl>
+            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Information Complet du client
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <p>{{ShowREservation.nom}}</p>
+                    <p>{{ShowREservation.email}}</p>
+                    <p>{{ShowREservation.numero_telephone}}</p>
+                </dd>
+            </div>
+            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                  Nombre de personne
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{ShowREservation.nombre_personnes}}
+              </dd>
+          </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Date de reservation
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {{ShowREservation.date_reservation}}
+                </dd>
+            </div>
+            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Heure de reservation
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {{ShowREservation.heure_reservation}}
+                </dd>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  prix total du reservation
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {{ShowREservation.prix_total}} Fcfa
+                </dd>
+            </div>
+            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Statut du reservation
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {{ShowREservation.statut}}
+                </dd>
+            </div>
+
+            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                  Les Plat choisis
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  <span *ngFor="let plat of ShowREservation.plats">{{plat.nom}} ,</span>
+              </dd>
+          </div>
+        </dl>
+    </div>
+    <div class="mt-5 sm:mt-8 sm:flex p-4 sm:justify-center lg:justify-end">
+      <div class="rounded-md shadow" *ngIf="ShowREservation.statut === 'en_attente'">
+          <button (click)=" acceptReservation(ShowREservation.id)" class="w-full flex items-center justify-center px-1 py-1 text-base leading-6 font-medium rounded-md text-white bg-green-400 hover:bg-green-500 hover:text-white focus:ring ring-offset-2 ring-green-400 focus:outline-none transition duration-150 ease-in-out md:py-2 md:text-lg md:px-7"
+                  >
+              Accepter
+      </button>
+      </div>
+      <div class="mt-3 sm:mt-0 sm:ml-3" *ngIf="ShowREservation.statut === 'en_attente'">
+          <button (click)="refuserReservation(ShowREservation.id)"  class="w-full flex items-center justify-center px-1 py-1 text-base leading-6 font-medium rounded-md text-white dark:text-white bg-red-400 hover:bg-red-500 hover:text-white focus:ring ring-offset-2 ring-red-400 focus:outline-none transition duration-150 ease-in-out md:py-2 md:text-lg md:px-7"
+               rel="noopener" target="_blank">
+              Refuser
+      </button>
+      </div>
+
+      <div class="mt-3 sm:mt-0 sm:ml-3" *ngIf="ShowREservation.statut === 'acceptee'">
+        <button (click)="annulerReservation(ShowREservation.id)" class="w-full flex items-center justify-center px-1 py-1 text-base leading-6 font-medium rounded-md text-white dark:text-white bg-red-400 hover:bg-red-500 hover:text-white focus:ring ring-offset-2 ring-red-400 focus:outline-none transition duration-150 ease-in-out md:py-2 md:text-lg md:px-7"
+             rel="noopener" target="_blank">
+            Annuler
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<app-loader *ngIf="actifLoader"></app-loader>

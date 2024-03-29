@@ -1,0 +1,163 @@
+.container_listPlats{
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.card {
+  margin-left: -1rem;
+  margin-right: -1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  margin-bottom: 2rem;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.25rem;
+  background-color: rgb(255, 255, 255);
+  padding: 1.5rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 1.7rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.price {
+  font-size: 1.2rem;
+  line-height: 1;
+  font-weight: 700;
+  color: green;
+  margin-bottom: 2rem;
+}
+
+.desc {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.625;
+  color: rgba(156, 163, 175, 1);
+}
+
+.lists {
+  margin-bottom: 1.5rem;
+  flex: 1 1 0%;
+  color: rgba(156, 163, 175, 1);
+}
+
+.lists .list {
+  margin-bottom: 0.5rem;
+  display: flex;
+  margin-left: 0.5rem
+}
+
+.lists .list svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+  color: var(--orange);
+}
+
+.action {
+  border: none;
+  outline: none;
+  display: inline-block;
+  border-radius: 0.25rem;
+  background-color: var(--orange);
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(17, 24, 39, 1);
+}
+
+
+
+
+
+
+
+
+
+/* ===================================================== */
+.container_form{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.454);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 2;
+  }
+
+  .container_form.show{
+    opacity: 1;
+    visibility: visible;
+  }
+
+
+
+  .input {
+    width: 100%;
+    /* max-width: 220px; */
+    height: 45px;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1.5px solid var(--orange);
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+  }
+
+  .input:hover {
+    border: 2px solid var(--orange);
+    box-shadow: 0px 0px 20px -17px;
+  }
+
+  .input:active {
+    transform: scale(0.95);
+  }
+
+  .input:focus {
+    border: 2px solid grey;
+  }
+
+
+  .mat-datepicker-content {
+    z-index: 9999; /* Valeur arbitraire, assure-toi qu'elle est supérieure à celle des autres éléments */
+  }
+
+
+
+  .example-panel-red.mat-mdc-select-panel {
+    background: rgba(255, 0, 0, 0.5);
+  }
+
+  .example-panel-green.mat-mdc-select-panel {
+    background: rgba(0, 255, 0, 0.5);
+  }
+
+  .example-panel-blue.mat-mdc-select-panel {
+    background: rgba(0, 0, 255, 0.5);
+  }
