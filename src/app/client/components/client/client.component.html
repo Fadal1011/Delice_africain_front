@@ -18,17 +18,17 @@
           </div>
           <div class="hidden md:flex md:space-x-10 list-none">
               <li>
-                  <a href="#" class="text-base font-normal text-gray-500 list-none hover:text-gray-900"
+                  <a routerLink="home" [class.activeLink]="isActive('home')" class="text-base font-normal text-gray-500 list-none hover:text-gray-900"
                       target="">Home</a>
               </li>
               <li>
-                  <a href="#" class="text-base font-normal text-gray-500 list-none hover:text-gray-900"
+                  <a routerLink="menu" [class.activeLink]="isActive('menu')" class="text-base font-normal text-gray-500 list-none hover:text-gray-900"
                       target="">Menu
                   </a>
               </li>
               <li>
-                  <a href="#" class="text-base font-normal text-gray-500 list-none hover:text-gray-900"
-                      target="_blank">Reservation
+                  <a routerLink="reservation" [class.activeLink]="isActive('reservation')" class="text-base font-normal text-gray-500 list-none hover:text-gray-900"
+                      target="">Reservation
                   </a>
               </li>
           </div>

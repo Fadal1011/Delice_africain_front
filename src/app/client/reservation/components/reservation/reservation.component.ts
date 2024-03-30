@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReservationService } from '../../services/reservation.service';
+import { ResponData } from 'src/app/shared/interfaces/respon-data';
+import { Plat } from 'src/app/core/plat/interfaces/plat';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
   selector: 'app-reservation',
@@ -11,8 +15,9 @@ export class ReservationComponent {
   reservationForm!: FormGroup;
   heures: string[] = [];
   nombresPersonnes: number[] = [];
+  Plats:Plat[] =[]
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,private reservationService:ReservationService, private alertService:AlertService,) { }
 
   ngOnInit(): void {
     this.reservationForm = this.formBuilder.group({
@@ -26,8 +31,21 @@ export class ReservationComponent {
       heure_reservation: ['', Validators.required],
       numero_telephone: ['', Validators.required]
     });
+    this.getAllPlats()
     this.genererHoraires();
     this.genererNombresPersonnes()
+  }
+
+  resetReservationForm() {
+    this.reservationForm.reset({
+      nombre_personnes: '',
+      plats: [this.createPlatFormGroup("", "")],
+      date_reservation: '',
+      nom: '',
+      email: '',
+      heure_reservation: '',
+      numero_telephone: ''
+    });
   }
 
   createPlatFormGroup(id: any, quantite: any): FormGroup {
@@ -74,10 +92,57 @@ export class ReservationComponent {
     if (this.reservationForm.valid) {
       // Soumettre le formulaire ici
       console.log(this.reservationForm.value);
+      this.reservationService.postData<any,ResponData<any>>('reservations',this.reservationForm.value).subscribe(
+        {
+          next:(data)=>{
+            this.alertService.showAlert(
+              {
+               title: "Success",
+               text: data.message,
+               icon: "success"
+              }
+             )
+             this.resetReservationForm();
+          },
+
+          error:(err)=>{
+            console.log(err);
+          },
+          complete:()=>{
+            console.log("requeted complete");
+          }
+        }
+      )
     } else {
       // Afficher des messages d'erreur si le formulaire est invalide
       console.log("Le formulaire n'est pas valide !");
+      this.alertService.showAlert(
+        {
+         title: "error",
+         text: "Le formulaire n'est pas valide ",
+         icon: "error"
+        }
+       )
     }
   }
+
+
+  getAllPlats(){
+    this.reservationService.getData<ResponData<Plat[]>>('plat').subscribe({
+      next:(data)=>{
+        this.Plats = data.data;
+      },
+      error:(err)=>{
+        console.log(err);
+
+      },
+      complete: ()=>{
+        console.log("requete complete!");
+
+      }
+    })
+  }
+
+
 
 }
