@@ -4,6 +4,7 @@ import { ReservationService } from '../../services/reservation.service';
 import { ResponData } from 'src/app/shared/interfaces/respon-data';
 import { Plat } from 'src/app/core/plat/interfaces/plat';
 import { AlertService } from 'src/app/shared/services/alert.service';
+import { LoginService } from 'src/app/auth/services/login.service';
 
 @Component({
   selector: 'app-reservation',
@@ -17,7 +18,7 @@ export class ReservationComponent {
   nombresPersonnes: number[] = [];
   Plats:Plat[] =[]
 
-  constructor(private formBuilder: FormBuilder,private reservationService:ReservationService, private alertService:AlertService,) { }
+  constructor(private formBuilder: FormBuilder,private reservationService:ReservationService, private alertService:AlertService, private loginService:LoginService) { }
 
   ngOnInit(): void {
     this.reservationForm = this.formBuilder.group({
@@ -31,10 +32,23 @@ export class ReservationComponent {
       heure_reservation: ['', Validators.required],
       numero_telephone: ['', Validators.required]
     });
+    this.getUser()
     this.getAllPlats()
     this.genererHoraires();
     this.genererNombresPersonnes()
   }
+
+
+  getUser(){
+    const user = this.loginService.getUser();
+     if(user){
+        this.reservationForm.patchValue({
+          nom:user.nom,
+          email:user.email,
+          numero_telephone:user.numero_telephone
+        })
+     }
+   }
 
   resetReservationForm() {
     this.reservationForm.reset({

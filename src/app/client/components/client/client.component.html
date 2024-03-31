@@ -34,11 +34,23 @@
           </div>
           <div class="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">
               <div class="inline-flex rounded-full shadow">
-                  <div href="#"
+                  <div routerLink="/auth" *ngIf="!isConnected"
                       class="inline-flex items-center px-4 py-2 text-base text-white bg-[#D91849] border border-transparent rounded-full cursor-pointer font-base">
                       se connecter
                   </div>
               </div>
+              <div class="inline-flex rounded-full shadow">
+                <div (click)="logout()" *ngIf="isConnected"
+                    class="inline-flex items-center px-4 py-2 text-base text-white bg-[#D91849] border border-transparent rounded-full cursor-pointer font-base">
+                    se deconnecter
+                </div>
+            </div>
+            <div class="inline-flex rounded-full shadow" routerLink="admin/plat">
+              <div *ngIf="roleUser === 'admin'"
+                  class="inline-flex items-center px-4 py-2 text-base text-white bg-green-400 ml-2 border border-transparent rounded-full cursor-pointer font-base">
+                  Admin
+              </div>
+          </div>
           </div>
       </nav>
   </div>

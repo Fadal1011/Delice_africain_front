@@ -18,7 +18,7 @@ const routes: Routes = [
         path: "type",loadChildren:() => import('./type/type.module').then(m => m.TypeModule)
       },
       {
-        path: "**", redirectTo: ""
+        path: "**", redirectTo: "home"
       }
     ]
   }

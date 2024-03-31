@@ -1,0 +1,119 @@
+
+
+<!-- component -->
+<div class="h-screen md:flex">
+	<div
+		class="relative overflow-hidden md:flex w-1/2 bg-[#D91849] i justify-around items-center hidden">
+		<div>
+      <img src="../../../../assets/Welcome-bro.png" alt="">
+		</div>
+		<div class="absolute -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+		<div class="absolute -bottom-40 -left-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+		<div class="absolute -top-40 -right-0 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+		<div class="absolute -top-20 -right-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+	</div>
+	<div class="flex md:w-1/2 justify-center py-10 items-center bg-white">
+		<form class="form_main" [formGroup]="formAuthenticate" (ngSubmit)="login()">
+      <div class="log w-[150px] min-h-[150px]">
+        <img src="../../../../assets/Black and Yellow Playful Restaurant Food Chef Logo.png" alt="">
+      </div>
+      <p class="heading mt-4">Connexion</p>
+      <div class="inputContainer">
+          <svg viewBox="0 0 16 16" fill="#2e2e2e" height="16" width="16" xmlns="http://www.w3.org/2000/svg" class="inputIcon">
+          <path d="M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z"></path>
+          </svg>
+      <input placeholder="Email" formControlName="email" id="username" class="inputField" type="text">
+      </div>
+
+  <div class="inputContainer">
+      <svg viewBox="0 0 16 16" fill="#2e2e2e" height="16" width="16" xmlns="http://www.w3.org/2000/svg" class="inputIcon">
+      <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
+      </svg>
+      <input placeholder="Password" formControlName="password" id="password" class="inputField" type="password">
+  </div>
+
+
+  <button id="button" ty>Se connecter</button>
+      <div class="signupContainer">
+          <p>Je n'ai aucun compte ?</p>
+          <div class="flex gap-2">
+            <a (click)="toggleRegister()" class="cursor-pointer">Creer un compte</a>
+            <a routerLink="home" style="background: green;">Page accueil</a>
+          </div>
+      </div>
+  </form>
+
+	</div>
+</div>
+
+
+
+
+<div class="register h-screen md:flex" [ngClass]="{'active': registerVisible}">
+  <div class="flex md:w-1/2 justify-center py-10 items-center bg-white">
+		<form class="form_main" [formGroup]="formRegister" (ngSubmit)="register()">
+      <div class="log w-[150px] min-h-[150px]">
+        <img src="../../../../assets/Black and Yellow Playful Restaurant Food Chef Logo.png" alt="">
+      </div>
+      <p class="heading mt-4">Inscription</p>
+      <div class="flex gap-4">
+        <div class="inputContainer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#2e2e2e" height="16" width="16" class="inputIcon"><path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13Z"></path></svg>
+            <input placeholder="Nom" formControlName="nom" id="username" class="inputField" type="text">
+        </div>
+        <div class="inputContainer">
+          <svg viewBox="0 0 16 16" fill="#2e2e2e" height="16" width="16" xmlns="http://www.w3.org/2000/svg" class="inputIcon">
+          <path d="M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z"></path>
+          </svg>
+          <input placeholder="Email" formControlName="email" id="username" class="inputField" type="email">
+      </div>
+      </div>
+
+      <div class="inputContainer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#2e2e2e" height="16" width="16" class="inputIcon">
+          <path d="M6 4V20H18V7.82843L14.1716 4H6ZM5 2H15L19.7071 6.70711C19.8946 6.89464 20 7.149 20 7.41421V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2ZM8 12H16V18H8V12Z"></path>
+        </svg>
+        <input placeholder="numero Telephone" formControlName="numero_telephone" id="password" class="inputField" type="text">
+    </div>
+
+    <div class="inputContainer">
+        <svg viewBox="0 0 16 16" fill="#2e2e2e" height="16" width="16" xmlns="http://www.w3.org/2000/svg" class="inputIcon">
+        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
+        </svg>
+        <input placeholder="Password" formControlName="password" id="password" class="inputField" type="password">
+    </div>
+
+    <div class="inputContainer">
+      <svg viewBox="0 0 16 16" fill="#2e2e2e" height="16" width="16" xmlns="http://www.w3.org/2000/svg" class="inputIcon">
+      <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
+      </svg>
+      <input placeholder="Confirmation Password" formControlName="password_confirmation" id="password" class="inputField" type="password">
+  </div>
+
+
+  <button id="button" [disabled]="!formRegister.valid">S'inscrire</button>
+      <div class="signupContainer">
+          <p>vous avez un compte ?</p>
+          <div class="flex gap-2">
+            <a (click)="toggleRegister()" class="cursor-pointer">Connectez-vous</a>
+            <a routerLink="home" style="background: green;">Page accueil</a>
+          </div>
+      </div>
+  </form>
+
+	</div>
+	<div
+		class="relative overflow-hidden md:flex w-1/2 bg-[#D91849] i justify-around items-center hidden">
+		<div>
+      <img src="../../../../assets/Forms-amico.png" alt="">
+		</div>
+		<div class="absolute -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+		<div class="absolute -bottom-40 -left-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+		<div class="absolute -top-40 -right-0 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+		<div class="absolute -top-20 -right-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+	</div>
+
+</div>
+
+
+<app-loader *ngIf="actifLoader"></app-loader>
