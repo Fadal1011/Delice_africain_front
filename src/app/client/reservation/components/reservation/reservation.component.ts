@@ -130,13 +130,13 @@ export class ReservationComponent {
     } else {
       // Afficher des messages d'erreur si le formulaire est invalide
       console.log("Le formulaire n'est pas valide !");
-      this.alertService.showAlert(
-        {
-         title: "error",
-         text: "Le formulaire n'est pas valide ",
-         icon: "error"
-        }
-       )
+      // this.alertService.showAlert(
+      //   {
+      //    title: "error",
+      //    text: "Le formulaire n'est pas valide ",
+      //    icon: "error"
+      //   }
+      //  )
     }
   }
 

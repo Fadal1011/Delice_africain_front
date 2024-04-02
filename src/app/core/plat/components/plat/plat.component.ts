@@ -55,29 +55,32 @@ export class PlatComponent implements OnInit{
   }
 
 
-    // Méthode pour gérer le changement de fichier
-    onFileChange(event: Event) {
-      const filesTarget = event.target as HTMLInputElement;
-      if (filesTarget.files) {
-        const file = filesTarget.files[0];
-        if (file) {
-          if (file.size > 500000) {
-            console.log('La taille de l\'image dépasse 500 Ko');
-            return;
-          }
-          const reader = new FileReader();
-          reader.onload = (e: ProgressEvent) => {
-            if (e.target) {
-              this.image?.setValue(reader.result)
-              this.defaultimage = reader.result as string;
-              console.log(this.defaultimage);
-
-            }
-          };
-          reader.readAsDataURL(file);
+  onFileChange(event: Event) {
+    const filesTarget = event.target as HTMLInputElement;
+    if (filesTarget.files) {
+      const file = filesTarget.files[0];
+      if (file) {
+        // Vérifier si le fichier est au format JPEG ou JPG
+        if (file.type !== 'image/jpeg' && file.type !== 'image/jpg') {
+          console.log('Le fichier doit être au format JPEG ou JPG');
+          // Vous pouvez afficher un message d'erreur à l'utilisateur ou faire toute autre action nécessaire
+          return;
         }
+
+        // Reste de votre logique de traitement du fichier
+        const reader = new FileReader();
+        reader.onload = (e: ProgressEvent) => {
+          if (e.target) {
+            console.log(reader.result);
+            this.image?.setValue(reader.result);
+            this.defaultimage = reader.result as string;
+            console.log(this.defaultimage);
+          }
+        };
+        reader.readAsDataURL(file);
       }
     }
+  }
 
     openFileInput() {
       this.fileInput.nativeElement.click();

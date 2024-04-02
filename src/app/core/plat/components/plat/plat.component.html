@@ -125,7 +125,7 @@
                   <label for="fileInput" class="w-40 h-40 m-auto rounded-full shadow">
                       <img src="{{defaultimage}}" class="w-40 h-40 m-auto rounded-full" alt="">
                   </label>
-                  <input id="fileInput" type="file" class="file bg-red-500 z-10 w-40 h-40 absolute top-0 left-0 opacity-0 cursor-pointer" (change)="onFileChange($event)" accept=".jpeg, .jpg, .png">
+                  <input id="fileInput" type="file" class="file bg-red-500 z-10 w-40 h-40 absolute top-0 left-0 opacity-0 cursor-pointer" (change)="onFileChange($event)" accept=".jpeg, .jpg">
                 </div>
                 <div class="mt-[1rem]" x-show="photoPreview" style="display: none;">
                     <span class="block w-40 h-40 rounded-full m-auto shadow" x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'" style="background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url('null');">
